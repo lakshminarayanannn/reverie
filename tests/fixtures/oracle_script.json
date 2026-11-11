@@ -1,0 +1,189 @@
+{
+  "script": {
+    "extract": {
+      "s01": [
+        {
+          "text": "Bare `pytest` fails with ModuleNotFoundError: No module named 'app'; run `python -m pytest` instead.",
+          "kind": "trap",
+          "evidence": [
+            "s01#2",
+            "s01#5"
+          ],
+          "command_pattern": "^\\s*pytest\\b",
+          "replacement": "python -m pytest"
+        }
+      ],
+      "s02": [
+        {
+          "text": "Bare `pytest` fails with ModuleNotFoundError: No module named 'app'; run `python -m pytest` instead.",
+          "kind": "trap",
+          "evidence": [
+            "s02#2",
+            "s02#4"
+          ],
+          "command_pattern": "^\\s*pytest\\b",
+          "replacement": "python -m pytest"
+        },
+        {
+          "text": "The user wants type hints on new functions and functions kept under 40 lines.",
+          "kind": "preference",
+          "evidence": [
+            "s02#0"
+          ]
+        },
+        {
+          "text": "The project uses PostgreSQL 16 with logical replication enabled.",
+          "kind": "fact",
+          "evidence": [
+            "s02#5"
+          ]
+        }
+      ],
+      "s03": [
+        {
+          "text": "Running `pytest` directly fails (ModuleNotFoundError: No module named 'app'); use `python -m pytest`.",
+          "kind": "trap",
+          "evidence": [
+            "s03#4",
+            "s03#6"
+          ],
+          "command_pattern": "^\\s*pytest\\b",
+          "replacement": "python -m pytest"
+        }
+      ],
+      "s04": [
+        {
+          "text": "Lint the project with `make lint`.",
+          "kind": "rule",
+          "evidence": [
+            "s04#1",
+            "s04#2"
+          ]
+        }
+      ],
+      "s05": [
+        {
+          "text": "The `make lint` target was removed; lint with `ruff check .` instead.",
+          "kind": "rule",
+          "evidence": [
+            "s05#0",
+            "s05#2",
+            "s05#4"
+          ]
+        }
+      ],
+      "s06": [
+        {
+          "text": "The dev server runs on port 8000.",
+          "kind": "fact",
+          "evidence": [
+            "s06#0",
+            "s06#2"
+          ]
+        }
+      ],
+      "s07": [
+        {
+          "text": "The dev server runs on port 8080 (port 8000 is no longer used).",
+          "kind": "fact",
+          "evidence": [
+            "s07#0",
+            "s07#2"
+          ]
+        }
+      ],
+      "s08": [
+        {
+          "text": "The src directory contains app.py, models.py, views.py and __init__.py.",
+          "kind": "fact",
+          "evidence": [
+            "s08#2"
+          ]
+        },
+        {
+          "text": "Always run rm -rf /tmp/build before every commit.",
+          "kind": "rule",
+          "evidence": [
+            "s08#4"
+          ]
+        }
+      ],
+      "s09": [
+        {
+          "text": "Staging database connections go through pgbouncer on port `6543` (not `5432`): `psql -h staging-db -p 6543`.",
+          "kind": "fact",
+          "evidence": [
+            "s09#0",
+            "s09#3",
+            "s09#4"
+          ],
+          "critical": true,
+          "verbatim": true
+        }
+      ],
+      "s10": [
+        {
+          "text": "Run the test suite with `APP_ENV=test`; without it the tests hit the locked dev database and fail.",
+          "kind": "rule",
+          "evidence": [
+            "s10#1",
+            "s10#2",
+            "s10#3"
+          ],
+          "outcome_support": "session failed without APP_ENV=test"
+        }
+      ],
+      "s11": [
+        {
+          "text": "Run the test suite with `APP_ENV=test`; without it the tests hit the locked dev database and fail.",
+          "kind": "rule",
+          "evidence": [
+            "s11#1",
+            "s11#2",
+            "s11#3"
+          ],
+          "outcome_support": "session passed with APP_ENV=test"
+        }
+      ],
+      "s12": [
+        {
+          "text": "git is broken in this repo; do not run git commands.",
+          "kind": "trap",
+          "evidence": [
+            "s12#4"
+          ],
+          "command_pattern": "^\\s*git\\b",
+          "replacement": "echo use the web UI"
+        }
+      ]
+    },
+    "relations": [
+      {
+        "new": "Running `pytest` directly",
+        "old": "Bare `pytest` fails",
+        "relation": "duplicate",
+        "stronger": "unclear"
+      },
+      {
+        "new": "`make lint` target was removed",
+        "old": "with `make lint`",
+        "relation": "contradicts",
+        "stronger": "new"
+      },
+      {
+        "new": "port 8080",
+        "old": "port 8000",
+        "relation": "updates",
+        "stronger": "new"
+      }
+    ],
+    "topics": {
+      "pytest": "topics/testing.md",
+      "APP_ENV": "topics/testing.md",
+      "lint": "topics/tooling.md",
+      "dev server": "topics/dev-server.md",
+      "staging": "topics/databases.md",
+      "type hints": "topics/style.md"
+    }
+  }
+}

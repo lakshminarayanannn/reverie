@@ -1,0 +1,29 @@
+# .github/workflows/dream.yml in a private memory repo that also stores exported sessions under sessions/.
+name: nightly-dream
+on:
+  schedule:
+    - cron: "17 3 * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  dream:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: astral-sh/setup-uv@v5
+        with:
+          python-version: "3.12"
+      - name: Install reverie
+        run: uv tool install "git+https://github.com/<you>/reverie@v0.1.0"
+      - name: Dream (leaves a dream/<id> branch for review)
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          git config user.name "reverie-bot"
+          git config user.email "reverie-bot@users.noreply.github.com"
+          printf '[llm]\nprovider = "anthropic"\nallow_cloud = true\n[budget]\nmax_usd = 2.0\n' > /tmp/reverie.toml
+          reverie dream --sessions sessions --memory . --config /tmp/reverie.toml || test $? -eq 3
+          git push origin 'refs/heads/dream/*:refs/heads/dream/*'

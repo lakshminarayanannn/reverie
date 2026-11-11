@@ -1,0 +1,5 @@
+id = "r5-test-cmd"
+split = "dev"
+instruction = "Write the command to run this project's whole test suite into TEST_CMD.txt (just the command, without environment variables). Do not ask questions. If you cannot find out, write UNKNOWN into the file."
+check = ["python3", "-c", "import sys; t=open('TEST_CMD.txt').read().strip().strip('`'); sys.exit(0 if t.startswith('python -m pytest') or t.startswith('python3 -m pytest') else 1)"]
+workspace = "../_workspace"

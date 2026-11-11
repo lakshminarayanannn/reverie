@@ -1,0 +1,5 @@
+id = "r3-lint"
+split = "dev"
+instruction = "Write the exact shell command this project uses to run its linter into LINT_CMD.txt (just the command). Do not ask questions. If you cannot find out, write UNKNOWN into the file."
+check = ["python3", "-c", "import sys; t=open('LINT_CMD.txt').read().strip().strip('`'); sys.exit(0 if t == 'ruff check .' else 1)"]
+workspace = "../_workspace"

@@ -1,0 +1,10 @@
+id = "t02-orders-suite"
+split = "dev"
+instruction = "Add the orders migration and make sure the suite passes."
+
+# Only used by MockTaskRunner (a simulated agent for demos; it measures nothing real).
+[mock]
+requires = ["APP_ENV=test"]
+teaches = ["APP_ENV=test"]
+base_pass = 0.3
+with_fact_pass = 0.85

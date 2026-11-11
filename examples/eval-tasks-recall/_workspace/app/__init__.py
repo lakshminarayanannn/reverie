@@ -1,0 +1,1 @@
+"""Widgetshop backend."""

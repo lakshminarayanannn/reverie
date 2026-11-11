@@ -1,0 +1,5 @@
+id = "r1-staging-db"
+split = "dev"
+instruction = "Create a file db.env in the current directory with two lines, STAGING_HOST=<host> and STAGING_PORT=<port>, giving how this project connects to its staging database. Do not ask questions. If you cannot find out, write UNKNOWN into the file."
+check = ["python3", "-c", "import re,sys; t=open('db.env').read(); sys.exit(0 if re.search(r'STAGING_HOST=staging-db\\b',t) and re.search(r'STAGING_PORT=6543\\b',t) else 1)"]
+workspace = "../_workspace"

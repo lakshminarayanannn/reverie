@@ -1,0 +1,10 @@
+id = "t05-refund-tests"
+split = "test"
+instruction = "Add a refund test and run the suite."
+
+# Only used by MockTaskRunner (a simulated agent for demos; it measures nothing real).
+[mock]
+requires = ["python -m pytest", "APP_ENV=test"]
+teaches = []
+base_pass = 0.3
+with_fact_pass = 0.85

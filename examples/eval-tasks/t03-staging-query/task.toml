@@ -1,0 +1,10 @@
+id = "t03-staging-query"
+split = "dev"
+instruction = "Count yesterday's orders on the staging database."
+
+# Only used by MockTaskRunner (a simulated agent for demos; it measures nothing real).
+[mock]
+requires = ["6543"]
+teaches = ["6543"]
+base_pass = 0.3
+with_fact_pass = 0.85

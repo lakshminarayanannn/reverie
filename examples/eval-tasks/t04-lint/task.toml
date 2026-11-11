@@ -1,0 +1,10 @@
+id = "t04-lint"
+split = "dev"
+instruction = "Lint the project before committing."
+
+# Only used by MockTaskRunner (a simulated agent for demos; it measures nothing real).
+[mock]
+requires = ["ruff check ."]
+teaches = ["ruff check ."]
+base_pass = 0.3
+with_fact_pass = 0.85

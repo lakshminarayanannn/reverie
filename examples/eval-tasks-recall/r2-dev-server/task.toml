@@ -1,0 +1,5 @@
+id = "r2-dev-server"
+split = "dev"
+instruction = "Write the URL of this project's local dev server (in the form http://127.0.0.1:<port>) into DEV_URL.txt. Do not ask questions. If you cannot find out, write UNKNOWN into the file."
+check = ["python3", "-c", "import sys; sys.exit(0 if open('DEV_URL.txt').read().strip().rstrip('/') == 'http://127.0.0.1:8080' else 1)"]
+workspace = "../_workspace"

@@ -1,0 +1,5 @@
+id = "t01-count-tests"
+split = "dev"
+instruction = "Run this project's test suite and write the number of passing tests (just the number) to RESULT.txt in the current directory."
+check = ["python3", "-c", "import sys; sys.exit(0 if open('RESULT.txt').read().strip() == '3' else 1)"]
+workspace = "workspace"

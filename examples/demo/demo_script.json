@@ -1,0 +1,67 @@
+{
+  "script": {
+    "extract": {
+      "demo-1": [
+        {
+          "text": "`make docs` fails with `sphinx-build: command not found`; run it as `uv run --group docs make docs`.",
+          "kind": "trap",
+          "evidence": [
+            "demo-1#2",
+            "demo-1#5",
+            "demo-1#6"
+          ],
+          "critical": true,
+          "command_pattern": "^\\s*make docs",
+          "replacement": "uv run --group docs make docs"
+        },
+        {
+          "text": "Docs are deployed by CI on every push to main.",
+          "kind": "fact",
+          "evidence": [
+            "demo-1#0"
+          ]
+        }
+      ],
+      "demo-2": [
+        {
+          "text": "`make docs-linkcheck` fails with `sphinx-build: command not found`; run it as `uv run --group docs make docs-linkcheck`.",
+          "kind": "trap",
+          "evidence": [
+            "demo-2#2",
+            "demo-2#4"
+          ],
+          "critical": true,
+          "command_pattern": "^\\s*make docs",
+          "replacement": "uv run --group docs make docs-linkcheck"
+        }
+      ],
+      "demo-3": [
+        {
+          "text": "Docs deploy only on tagged releases (v*); pushes to main no longer deploy them.",
+          "kind": "fact",
+          "evidence": [
+            "demo-3#0"
+          ]
+        }
+      ]
+    },
+    "relations": [
+      {
+        "new": "`make docs-linkcheck` fails",
+        "old": "`make docs` fails",
+        "relation": "duplicate",
+        "stronger": "unclear"
+      },
+      {
+        "new": "tagged releases",
+        "old": "every push to main",
+        "relation": "contradicts",
+        "stronger": "new"
+      }
+    ],
+    "topics": {
+      "deploy": "topics/docs-deploy.md",
+      "make docs": "topics/docs-build.md"
+    }
+  }
+}

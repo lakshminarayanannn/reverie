@@ -1,0 +1,2 @@
+# m h dom mon dow  command   (03:17 every night; output appended to a log)
+17 3 * * * cd "$HOME" && "$HOME/.local/bin/reverie" dream --sessions "$HOME/.local/share/reverie/sessions/claude-code" --memory "$HOME/agent-memory" --config "$HOME/.config/reverie/reverie.toml" --json >> "$HOME/.local/share/reverie/dream.log" 2>&1

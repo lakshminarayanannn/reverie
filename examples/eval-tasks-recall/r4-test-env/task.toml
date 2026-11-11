@@ -1,0 +1,5 @@
+id = "r4-test-env"
+split = "dev"
+instruction = "Write the environment variable assignment (NAME=value) that must be set when running this project's test suite into TEST_ENV.txt. Do not ask questions. If you cannot find out, write UNKNOWN into the file."
+check = ["python3", "-c", "import sys; sys.exit(0 if open('TEST_ENV.txt').read().strip().strip('`') == 'APP_ENV=test' else 1)"]
+workspace = "../_workspace"

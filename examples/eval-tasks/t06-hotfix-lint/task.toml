@@ -1,0 +1,10 @@
+id = "t06-hotfix-lint"
+split = "test"
+instruction = "Prepare the hotfix commit: lint and run tests."
+
+# Only used by MockTaskRunner (a simulated agent for demos; it measures nothing real).
+[mock]
+requires = ["ruff check .", "python -m pytest"]
+teaches = []
+base_pass = 0.3
+with_fact_pass = 0.85

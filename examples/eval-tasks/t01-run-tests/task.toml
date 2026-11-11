@@ -1,0 +1,10 @@
+id = "t01-run-tests"
+split = "dev"
+instruction = "Run the unit tests and fix the failing slug test."
+
+# Only used by MockTaskRunner (a simulated agent for demos; it measures nothing real).
+[mock]
+requires = ["python -m pytest"]
+teaches = ["python -m pytest"]
+base_pass = 0.3
+with_fact_pass = 0.85
